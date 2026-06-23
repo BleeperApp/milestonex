@@ -14,7 +14,7 @@ type MilestoneInput = {
 }
 
 export async function createProject(formData: FormData) {
-  const u = await requireRole(["owner", "admin"])
+  const u = await requireRole(["owner"])
 
   const parsedMilestones = [] as MilestoneInput[]
 

@@ -7,6 +7,20 @@ export const dynamic = "force-dynamic"
 
 export default async function NewProjectPage() {
   const user = await getSession()
+  
+  // Only project owners can create projects
+  if (!user || user.role !== "owner") {
+    return (
+      <div className="flex min-h-svh flex-col bg-background">
+        <SiteHeader user={user} />
+        <main className="mx-auto w-full max-w-3xl px-4 py-12">
+          <p className="text-muted-foreground">
+            Only project owners can submit projects. Please contact an administrator if you need to change your role.
+          </p>
+        </main>
+      </div>
+    )
+  }
 
   return (
     <div className="flex min-h-svh flex-col bg-background">

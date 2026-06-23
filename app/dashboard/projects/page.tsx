@@ -28,6 +28,20 @@ export default async function OwnerDashboard() {
     )
   }
 
+  // Only project owners should see this page
+  if (user.role !== "owner") {
+    return (
+      <div className="flex min-h-svh flex-col bg-background">
+        <SiteHeader user={user} />
+        <main className="mx-auto w-full max-w-6xl px-4 py-16">
+          <p className="text-muted-foreground">
+            This page is for project owners only. Please check your dashboard for your role.
+          </p>
+        </main>
+      </div>
+    )
+  }
+
   const projects = await getMyProjects()
   const allMilestones = await Promise.all(
     projects.map((p) => getProjectMilestones(p.id)),
