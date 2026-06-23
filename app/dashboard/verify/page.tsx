@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowLeft, CheckCircle2 } from "lucide-react"
 import { getSession } from "@/lib/session"
+import { redirect } from "next/navigation"
 import { getVerificationQueue } from "@/app/actions/milestones"
 import { SiteHeader } from "@/components/site-header"
 import { Card } from "@/components/ui/card"
@@ -11,6 +12,8 @@ export const dynamic = "force-dynamic"
 
 export default async function VerifierDashboard() {
   const user = await getSession()
+  if (!user) return redirect("/sign-in")
+  if (user.role !== "verifier") return redirect("/dashboard")
   const queue = await getVerificationQueue()
 
   return (

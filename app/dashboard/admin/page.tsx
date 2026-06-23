@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowLeft, FileText, Users, AlertCircle } from "lucide-react"
 import { getSession } from "@/lib/session"
+import { redirect } from "next/navigation"
 import { getAllProjects } from "@/lib/queries"
 import { getAllUsers } from "@/app/actions/admin"
 import { getAllDisputes } from "@/app/actions/disputes"
@@ -16,6 +17,8 @@ export const dynamic = "force-dynamic"
 
 export default async function AdminDashboard() {
   const user = await getSession()
+  if (!user) return redirect("/sign-in")
+  if (user.role !== "admin") return redirect("/dashboard")
   const [projects, allUsers, disputes] = await Promise.all([
     getAllProjects(),
     getAllUsers(),

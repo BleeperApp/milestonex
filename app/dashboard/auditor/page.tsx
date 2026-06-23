@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowLeft, Banknote, FileText, TrendingUp } from "lucide-react"
 import { getSession } from "@/lib/session"
+import { redirect } from "next/navigation"
 import { getMyProjects } from "@/app/actions/projects"
 import { SiteHeader } from "@/components/site-header"
 import { Card } from "@/components/ui/card"
@@ -11,6 +12,8 @@ export const dynamic = "force-dynamic"
 
 export default async function AuditorDashboard() {
   const user = await getSession()
+  if (!user) return redirect("/sign-in")
+  if (user.role !== "auditor") return redirect("/dashboard")
   const projects = await getMyProjects()
 
   return (

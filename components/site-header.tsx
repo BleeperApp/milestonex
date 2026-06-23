@@ -3,7 +3,6 @@ import Image from "next/image"
 // menu icon is rendered inside the client `QuickActionsMenu` component
 import type { SessionUser } from "@/lib/session"
 import { Bell } from "lucide-react"
-import QuickActionsMenu from "@/components/quick-actions-menu"
 
 export function SiteHeader({ 
   user, 
@@ -17,12 +16,7 @@ export function SiteHeader({
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center px-4">
-        {/* Left: quick actions menu (shows when logged in) */}
-        {user && (
-          <div className="flex items-center w-12">
-            <QuickActionsMenu user={user} />
-          </div>
-        )}
+        {/* Left: reserved for page-level sidebars; header no longer renders quick actions */}
 
         {/* Center: logo and navigation (left-aligned when logged out) */}
         <div className={`flex-1 flex items-center ${user ? "justify-center" : "justify-start"}`}>
