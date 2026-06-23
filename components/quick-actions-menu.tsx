@@ -58,7 +58,7 @@ export default function QuickActionsMenu({ user }: { user: SessionUser }) {
 
       {open && (
         <div className="fixed inset-0 z-50 flex">
-          <div className="w-72 max-w-full bg-sidebar p-4 border-r border-sidebar-border">
+          <div className="w-72 max-w-full bg-popover p-4 border-r border-sidebar-border h-screen">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-medium">Quick actions</h3>
               <button

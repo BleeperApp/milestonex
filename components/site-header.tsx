@@ -19,16 +19,14 @@ export function SiteHeader({
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center px-4">
         {/* Left: quick actions menu (shows when logged in) */}
-        <div className="flex items-center w-12">
-                  {user ? (
-                    <QuickActionsMenu user={user} />
-                  ) : (
-                    <div />
-                  )}
-        </div>
+        {user && (
+          <div className="flex items-center w-12">
+            <QuickActionsMenu user={user} />
+          </div>
+        )}
 
-        {/* Center: logo and navigation */}
-        <div className="flex-1 flex items-center justify-center">
+        {/* Center: logo and navigation (left-aligned when logged out) */}
+        <div className={`flex-1 flex items-center ${user ? "justify-center" : "justify-start"}`}>
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2">
               <Image
