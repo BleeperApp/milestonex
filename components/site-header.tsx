@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ShieldCheck, Bell } from "lucide-react"
+import Image from "next/image"
 import type { SessionUser } from "@/lib/session"
 import { UserProfileMenu } from "@/components/user-profile-menu"
 import { NotificationsPopover } from "@/components/notifications-popover"
@@ -16,14 +16,18 @@ export function SiteHeader({
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center px-4">
-        <a href="/" className="flex items-center gap-2 flex-shrink-0">
-          <span className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <ShieldCheck className="size-5" />
-          </span>
+        <Link href="/" className="flex items-center gap-2 flex-shrink-0">
+          <Image
+            src="/logo.png"
+            alt="Milestone X"
+            width={36}
+            height={36}
+            className="rounded-md"
+          />
           <span className="text-base font-semibold tracking-tight text-foreground">
             Milestone X
           </span>
-        </a>
+        </Link>
 
         {!hideNavigation && (
           <nav className="hidden items-center gap-6 text-sm md:flex flex-1 justify-center">
