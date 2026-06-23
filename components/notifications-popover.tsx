@@ -70,9 +70,9 @@ export function NotificationsPopover({ unreadCount = 0 }: { unreadCount?: number
             className="fixed inset-0 z-40"
             onClick={() => setOpen(false)}
           />
-          
-          {/* Popover */}
-          <div className="absolute right-0 mt-2 w-96 max-h-[500px] rounded-lg border border-border bg-background shadow-lg z-50 flex flex-col">
+
+          {/* Popover for medium+ screens */}
+          <div className="hidden md:block absolute right-0 mt-2 w-96 max-h-[500px] rounded-lg border border-border bg-background shadow-lg z-50 flex flex-col">
             {/* Header */}
             <div className="flex items-center justify-between border-b border-border p-4">
               <h3 className="font-semibold text-foreground">Notifications</h3>
@@ -129,6 +129,74 @@ export function NotificationsPopover({ unreadCount = 0 }: { unreadCount?: number
             </div>
 
             {/* Footer */}
+            {notifications.length > 0 && (
+              <div className="border-t border-border p-4 flex justify-center">
+                <Link
+                  href="/dashboard/notifications"
+                  className="text-sm text-primary hover:underline font-medium"
+                  onClick={() => setOpen(false)}
+                >
+                  View all notifications
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Full-screen panel for small screens */}
+          <div className="md:hidden fixed inset-0 z-50 flex flex-col bg-popover">
+            <div className="flex items-center justify-between border-b border-border p-4">
+              <h3 className="font-semibold text-foreground">Notifications</h3>
+              <button
+                onClick={() => setOpen(false)}
+                className="p-1 hover:bg-muted rounded transition-colors"
+              >
+                <X className="size-4" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto">
+              {loading ? (
+                <div className="p-4 text-center text-sm text-muted-foreground">
+                  Loading notifications...
+                </div>
+              ) : notifications.length === 0 ? (
+                <div className="p-4 text-center text-sm text-muted-foreground">
+                  No notifications yet
+                </div>
+              ) : (
+                <div className="divide-y divide-border">
+                  {notifications.map((notification) => (
+                    <div
+                      key={notification.id}
+                      className={`p-4 cursor-pointer transition-colors ${
+                        notification.read
+                          ? "bg-background hover:bg-muted/50"
+                          : "bg-primary/5 hover:bg-primary/10"
+                      }`}
+                      onClick={() => handleMarkAsRead(notification.id)}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <h4 className="font-medium text-foreground text-sm">
+                            {notification.title}
+                          </h4>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            {notification.body}
+                          </p>
+                          <span className="text-xs text-muted-foreground mt-2 block">
+                            {new Date(notification.createdAt).toLocaleDateString()}
+                          </span>
+                        </div>
+                        {!notification.read && (
+                          <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-1" />
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {notifications.length > 0 && (
               <div className="border-t border-border p-4 flex justify-center">
                 <Link

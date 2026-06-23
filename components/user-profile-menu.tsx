@@ -32,8 +32,9 @@ export function UserProfileMenu({ user }: { user: SessionUser }) {
         </div>
       </button>
 
+      {/* Desktop popover */}
       {open && (
-        <div className="absolute right-0 mt-2 w-48 rounded-lg border border-border bg-background shadow-lg z-50">
+        <div className="hidden md:block absolute right-0 mt-2 w-48 rounded-lg border border-border bg-background shadow-lg z-50">
           <div className="border-b border-border p-3">
             <p className="font-medium text-foreground text-sm">{user.name}</p>
             <p className="text-xs text-muted-foreground">{user.email}</p>
@@ -66,6 +67,51 @@ export function UserProfileMenu({ user }: { user: SessionUser }) {
             >
               Logout
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile full-screen profile panel */}
+      {open && (
+        <div className="md:hidden fixed inset-0 z-50 flex flex-col bg-popover">
+          <div className="flex items-center justify-between border-b border-border p-4">
+            <div>
+              <p className="font-medium text-foreground text-sm">{user.name}</p>
+              <p className="text-xs text-muted-foreground">{user.email}</p>
+            </div>
+            <button
+              onClick={() => setOpen(false)}
+              className="p-2 rounded-md hover:bg-muted"
+            >
+              Close
+            </button>
+          </div>
+
+          <div className="flex-1 p-4">
+            <p className="text-sm text-muted-foreground capitalize mb-4">Role: {user.role}</p>
+            <Link
+              href="/dashboard/profile"
+              className="block w-full text-left px-3 py-3 text-base text-foreground hover:bg-muted rounded-lg transition-colors mb-2"
+              onClick={() => setOpen(false)}
+            >
+              Profile
+            </Link>
+            <Link
+              href="/dashboard/settings"
+              className="block w-full text-left px-3 py-3 text-base text-foreground hover:bg-muted rounded-lg transition-colors mb-2"
+              onClick={() => setOpen(false)}
+            >
+              Settings
+            </Link>
+
+            <div className="mt-6">
+              <button
+                onClick={handleLogout}
+                className="w-full text-left px-3 py-3 text-base text-destructive hover:bg-muted rounded-lg transition-colors"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       )}

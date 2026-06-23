@@ -48,10 +48,29 @@ export default function QuickActionsMenu({ user }: { user: SessionUser }) {
 
   return (
     <>
+      {/* Persistent sidebar on desktop */}
+      <div className="hidden md:flex flex-col w-72 h-screen fixed left-0 top-16 p-4 border-r border-sidebar-border bg-popover z-30">
+        <h3 className="text-lg font-medium">Quick actions</h3>
+        <div className="mt-4 space-y-3">
+          {availableLinks.map((c) => (
+            <Link
+              key={c.role}
+              href={c.href}
+              className="flex items-start gap-3 rounded-md border border-border p-3 hover:bg-muted"
+            >
+              <div>
+                <p className="font-medium text-foreground">{c.label}</p>
+                <p className="text-xs text-muted-foreground">{c.desc}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
       <button
         aria-label="Open quick actions"
         onClick={() => setOpen(true)}
-        className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:bg-accent/50"
+        className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:bg-accent/50"
       >
         <Menu className="size-5" />
       </button>
