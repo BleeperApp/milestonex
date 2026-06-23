@@ -57,7 +57,21 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.24 0.02 160);
   --primary: oklch(0.45 0.09 160);
-  --primary-foreground: oklch(0.985 0.006 95);
+    --sidebar-ring: oklch(0.45 0.09 160);
+
+    /* App Color System - Light Theme */
+    --app-background: #F7F8FA;
+    --app-home-background: #F5F5F7;
+    --app-zone-hairline: #E8E8ED;
+    --app-surface: #FFFFFF;
+    --app-secondary-surface: #EEF1F4;
+    --app-text: #1F2937;
+    --app-text-secondary: #64748B;
+    --app-border: #DCDEA;
+    --app-accent: #102A43;
+    --app-accent-hover: #0B1F33;
+    --app-success: #2E7D5B;
+    --app-error: #C0392B;
   --secondary: oklch(0.95 0.012 150);
   --secondary-foreground: oklch(0.32 0.04 160);
   --muted: oklch(0.95 0.008 120);
@@ -93,6 +107,20 @@
   --popover: oklch(0.25 0.025 160);
   --popover-foreground: oklch(0.96 0.01 95);
   --primary: oklch(0.7 0.12 160);
+
+    /* App Color System - Dark Theme */
+    --app-background: #000000;
+    --app-home-background: #000000;
+    --app-zone-hairline: #334155;
+    --app-surface: #162032;
+    --app-secondary-surface: #1E293B;
+    --app-text: #F8FAFC;
+    --app-text-secondary: #94A3B8;
+    --app-border: #334155;
+    --app-accent: #1D4ED8;
+    --app-accent-hover: #2563EB;
+    --app-success: #22C55E;
+    --app-error: #EF4444;
   --primary-foreground: oklch(0.2 0.02 160);
   --secondary: oklch(0.3 0.03 160);
   --secondary-foreground: oklch(0.96 0.01 95);
