@@ -16,6 +16,15 @@ export async function getMyNotifications() {
     .limit(50)
 }
 
+export async function getUnreadNotificationsCount() {
+  const u = await requireUser()
+  const result = await db
+    .select({ count: notifications.id })
+    .from(notifications)
+    .where(and(eq(notifications.userId, u.id), eq(notifications.read, false)))
+  return result.length
+}
+
 export async function markNotificationRead(id: number) {
   const u = await requireUser()
   await db

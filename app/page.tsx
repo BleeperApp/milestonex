@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
+import { redirect } from "next/navigation"
 import {
   ShieldCheck,
   Lock,
@@ -23,6 +24,10 @@ export default async function HomePage() {
     getPlatformStats(),
     getPublicProjects(),
   ])
+
+  if (user) {
+    redirect("/dashboard")
+  }
 
   const featured = projects.slice(0, 3)
 
