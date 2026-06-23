@@ -2,8 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 // menu icon is rendered inside the client `QuickActionsMenu` component
 import type { SessionUser } from "@/lib/session"
-import { UserProfileMenu } from "@/components/user-profile-menu"
-import { NotificationsPopover } from "@/components/notifications-popover"
+import { Bell } from "lucide-react"
 import QuickActionsMenu from "@/components/quick-actions-menu"
 
 export function SiteHeader({ 
@@ -69,10 +68,40 @@ export function SiteHeader({
         {/* Right: user controls */}
         <div className="flex items-center gap-4 w-48 justify-end">
           {user ? (
-            <div className="flex items-center gap-2">
-              <NotificationsPopover unreadCount={unreadCount} />
-              <UserProfileMenu user={user} />
-            </div>
+            (() => {
+              const initials = user.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")
+                .toUpperCase()
+
+              return (
+                <div className="flex items-center gap-2">
+                  <Link
+                    href="/dashboard/notifications"
+                    className="relative p-2 rounded-lg hover:bg-muted transition-colors"
+                    title="Notifications"
+                  >
+                    <Bell className="size-5 text-muted-foreground" />
+                    {unreadCount > 0 && (
+                      <span className="absolute top-1 right-1 flex size-4 items-center justify-center rounded-full bg-destructive text-destructive-foreground text-xs font-bold">
+                        {unreadCount > 99 ? "99+" : unreadCount}
+                      </span>
+                    )}
+                  </Link>
+
+                  <Link
+                    href="/dashboard/profile"
+                    className="flex items-center gap-2 rounded-full p-1 hover:bg-muted transition-colors"
+                    aria-label="Profile"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-semibold">
+                      {initials}
+                    </div>
+                  </Link>
+                </div>
+              )
+            })()
           ) : (
             <div className="flex items-center gap-4">
               <a
