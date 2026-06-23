@@ -81,13 +81,13 @@ export function DonateWidget({
                 : "border-border text-foreground hover:bg-muted"
             }`}
           >
-            ${p}
+            Ksh {p}
           </button>
         ))}
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="amount">Amount (USD)</Label>
+        <Label htmlFor="amount">Amount (Ksh)</Label>
         <Input
           id="amount"
           type="number"
@@ -105,7 +105,7 @@ export function DonateWidget({
         {isPending
           ? "Processing..."
           : isAuthed
-            ? `Contribute $${amount || 0}`
+            ? `Contribute Ksh ${amount || 0}`
             : "Sign in to contribute"}
       </button>
       <p className="text-xs text-muted-foreground">

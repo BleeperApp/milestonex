@@ -114,7 +114,7 @@ export function NewProjectForm() {
                   name={`milestones[${i}].amount`}
                   type="number"
                   min="0"
-                  placeholder="Amount (USD)"
+                  placeholder="Amount (Ksh)"
                 />
                 <Input name={`milestones[${i}].description`} placeholder="Description" />
               </div>
